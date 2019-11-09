@@ -10,11 +10,11 @@ Motoko programming language.
 ### Usage
 
 Encode a list of unsigned 8-bit integers in hexadecimal format.
-```swift
+```motoko
 public func encode(list : List<Word8>) : Text
 ```
 
 Decode a list of unsigned 8-bit integers in hexadecimal format.
-```swift
+```motoko
 public func decode(text : Text) : Result<List<Word8>, DecodeError>
 ```
