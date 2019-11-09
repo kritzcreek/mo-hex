@@ -1,5 +1,7 @@
 ## The Hex Package
 
+[![Build Status](https://travis-ci.org/enzoh/mo-hex.svg?branch=master)](https://travis-ci.org/enzoh/mo-hex?branch=master)
+
 ### Overview
 
 This package implements hexadecimal encoding and decoding routines for the
