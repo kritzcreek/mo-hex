@@ -16,7 +16,7 @@ actor Test {
 
   public func test() {
     let expect = toBytes("Hello World");
-    let actual = Result.assertUnwrap<List.List<Word8>, Codec.Hex.DecodeError>(
+    let actual = Result.assertUnwrap<List<Word8>, Codec.Hex.DecodeError>(
       Codec.Hex.decode(Codec.Hex.encode(expect))
     );
     assert(List.isEq<Word8>(expect, actual, func (a, b) { a == b }))
