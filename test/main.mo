@@ -1,7 +1,9 @@
-import Codec "../src/hex.mo";
-import List "mo:stdlib/list.mo";
-import Option "mo:stdlib/option.mo";
-import Result "mo:stdlib/result.mo";
+import Codec "../src/hex";
+import List "mo:stdlib/list";
+import Nat "mo:stdlib/nat";
+import Option "mo:stdlib/option";
+import Prim "mo:prim";
+import Result "mo:stdlib/result";
 
 type List<T> = List.List<T>;
 
@@ -10,7 +12,7 @@ actor Test {
   func toBytes(ascii : Text) : List<Word8> {
     let get = ascii.chars().next;
     List.tabulate<Word8>(ascii.len(), func (_) {
-      natToWord8(word32ToNat(charToWord32(Option.unwrap<Char>(get()))))
+      Nat.toWord8(Nat.fromWord32(Prim.charToWord32(Option.unwrap<Char>(get()))))
     })
   };
 

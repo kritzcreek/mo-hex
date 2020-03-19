@@ -7,10 +7,12 @@
  * Stability   : Experimental
  */
 
-import List "mo:stdlib/list.mo";
-import Option "mo:stdlib/option.mo";
-import Prelude "mo:stdlib/prelude.mo";
-import Result "mo:stdlib/result.mo";
+import Iter "mo:stdlib/iter";
+import List "mo:stdlib/list";
+import Option "mo:stdlib/option";
+import Prelude "mo:stdlib/prelude";
+import Prim "mo:prim";
+import Result "mo:stdlib/result";
 
 type List<T> = List.List<T>;
 type Result<Ok, Err> = Result.Result<Ok, Err>;
@@ -43,7 +45,7 @@ module Hex {
       Option.option<Text, Result<Word8, DecodeError>>(
         Option.bind<Char, Text>(get(), func (c1) {
           Option.bind<Char, Text>(get(), func (c2) {
-            ?(charToText(c1) # charToText(c2))
+            ?(Prim.charToText(c1) # Prim.charToText(c2))
           })
         }),
         decodeWord8,
@@ -53,7 +55,7 @@ module Hex {
 
     let n : Nat = text.len() / 2 + text.len() % 2;
     var accum = List.nil<Word8>();
-    for (_ in range(1, n)) {
+    for (_ in Iter.range(1, n)) {
       switch (parse()) {
         case (#ok w8) {
           accum := List.push<Word8>(w8, accum);
@@ -81,14 +83,14 @@ module Hex {
         [ '0', '1', '2', '3', '4', '5', '6', '7'
         , '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
         ];
-      arr[word8ToNat(w4)]
+      arr[Prim.word8ToNat(w4)]
     };
 
     let n : Word8 = 0x10;
     let c1 : Char = encodeWord4(w8 / n);
     let c2 : Char = encodeWord4(w8 % n);
 
-    charToText(c1) # charToText(c2)
+    Prim.charToText(c1) # Prim.charToText(c2)
 
   };
 
@@ -120,7 +122,7 @@ module Hex {
             #err (#msg "Unexpected character!")
           }
         },
-        natToWord8
+        Prim.natToWord8
       )
     };
 
